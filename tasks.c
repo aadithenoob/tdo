@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 static void parse_cmd(const char *cmd, const char *value) {
     if (strcmp(cmd, "add") == 0) {
@@ -41,6 +42,11 @@ int main() {
             return 0;
         } else if (delim != NULL) {
             *delim = '\0';
+            
+            for (int i = 0; i < strlen(input); i++) {
+                input[i] = tolower(input[i]);
+            }
+            
             char *cmd = input;
             char *value = delim + 1;
 
