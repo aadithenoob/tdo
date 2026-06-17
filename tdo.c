@@ -12,7 +12,7 @@ static int parse_cmd(int task_number, const char *cmd, const char *value) {
 
         file = fopen("tasks.md", "a");
         fprintf(file, "%d %s\n", t_no, value);
-        printf("Task added.\n");
+        printf("Task added.\n\n");
         fclose(file);
     } else if (strcmp(cmd, "view") == 0) {
         FILE *file; 
@@ -23,17 +23,18 @@ static int parse_cmd(int task_number, const char *cmd, const char *value) {
         while (fgets(content, sizeof(content), file) != NULL) {
             printf("%s", content);
         }
+        printf("\n");
 
         fclose(file);
     } else {
-        fprintf(stderr, "error: command '%s' not found.\n", cmd);
+        fprintf(stderr, "error: command '%s' not found.\n\n", cmd);
     }
 
     return t_no;
 }
 
 int main() {
-    printf("--- Task Manager ---\n");
+    printf("--- Task Manager ---\n\n");
     int t_no = 0;
 
     while(1) {
