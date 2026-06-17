@@ -12,6 +12,7 @@ static int parse_cmd(int task_number, const char *cmd, const char *value) {
 
         file = fopen("tasks.md", "a");
         fprintf(file, "%d %s\n", t_no, value);
+        printf("Task added.\n");
         fclose(file);
     } else if (strcmp(cmd, "view") == 0) {
         FILE *file; 
