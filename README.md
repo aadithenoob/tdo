@@ -45,22 +45,6 @@ An interactive task manager CLI, written in C.
 
     *(will be added)*
 
-## Bugs
-
-Currently, `add` appends task numbers to tasks, but the program does not remember previously assigned task numbers.
-
-### Example
-
-```
-> add wash the dishes
-Task added.
-
-> view
-1 buy milk
-2 go for a walk
-1 wash the dishes <--
-```
-
 ## Building
 
 Compile the program:
