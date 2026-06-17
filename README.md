@@ -1,2 +1,2 @@
-# Task Manager
-A task-managing CLI, written in C.
+# tdo - Task Manager CLI
+An interactive task manager CLI, written in C.
