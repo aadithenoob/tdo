@@ -42,6 +42,11 @@ int main() {
         printf("> ");
         fgets(input, sizeof(input), stdin);
         input[strcspn(input, "\n")] = '\0';
+
+        if (strcmp(input, "") == 0) {
+            continue;
+        }
+
         int index = strcspn(input, " ");
         char *delim = &input[index];
 
