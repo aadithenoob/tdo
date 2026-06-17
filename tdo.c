@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-static void parse_cmd(const char *cmd, const char *value) {
+static int parse_cmd(int task_number, const char *cmd, const char *value) {
+    int t_no = task_number;
+
     if (strcmp(cmd, "add") == 0) {
+        t_no++;
         FILE *file; 
 
         file = fopen("tasks.md", "a");
-        fprintf(file, "%s\n", value);
+        fprintf(file, "%d %s\n", t_no, value);
         fclose(file);
     } else if (strcmp(cmd, "view") == 0) {
         FILE *file; 
@@ -24,10 +27,13 @@ static void parse_cmd(const char *cmd, const char *value) {
     } else {
         fprintf(stderr, "error: command '%s' not found.\n", cmd);
     }
+
+    return t_no;
 }
 
 int main() {
     printf("--- Task Manager ---\n");
+    int t_no = 0;
 
     while(1) {
         char input[256];
@@ -50,7 +56,7 @@ int main() {
             char *cmd = input;
             char *value = delim + 1;
 
-            parse_cmd(cmd, value);
+            t_no = parse_cmd(t_no, cmd, value);
         }
     }
 
