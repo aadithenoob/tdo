@@ -47,7 +47,7 @@ An interactive task manager CLI, written in C.
 
 ## Bugs
 
-Currently, `add` appends task numbers to tasks, but the program does not track or use them in any meaningful way, as it does not remember previously assigned task numbers.
+Currently, `add` appends task numbers to tasks, but the program does not remember previously assigned task numbers.
 
 ### Example
 
