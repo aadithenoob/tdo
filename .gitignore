@@ -1,2 +1,7 @@
 tasks.md
-tdo.exe
+
+# for windows
+*.exe 
+
+# for mac/linux
+tdo
