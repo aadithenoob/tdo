@@ -23,8 +23,10 @@ static int get_task_number() {
     char last_line[1024];
     get_last_line(last_line);
 
-    printf("%s\n", last_line);
-    
+    if (strlen(last_line) == 0) {
+        return 0;
+    }
+
     int index = strcspn(last_line, " ");
     char *delim = &last_line[index];
     *delim = '\0';
@@ -69,8 +71,33 @@ static void parse_cmd(char *cmd, const char *value) {
         }
 
         if (strcmp(value, "lt") == 0) {
-            char last_line[1024];
-            get_last_line(last_line);
+            FILE *src = fopen("tasks.md", "r");
+
+            if (strcmp) {
+                fprintf(stderr, "error: file is empty or it has not been created.\n\n");
+                return;
+            }
+
+            char current_line[1024];
+
+            fgets(current_line, sizeof(current_line), src);
+
+            char next_line[1024];
+            FILE *temp = fopen("temp.md", "w");
+            
+
+            while (fgets(next_line, sizeof(next_line), src) != NULL) {
+                fprintf(temp, "%s", current_line);
+                strcpy(current_line, next_line);
+            }
+
+            fclose(src);
+            fclose(temp);
+
+            remove("tasks.md");
+            rename("temp.md", "tasks.md");
+
+            printf("Task deleted.\n\n");
         } else {
             int task = atoi(value);
         }
