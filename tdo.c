@@ -3,21 +3,27 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-static int get_task_number() {
+static void get_last_line(char *last_line) {
     FILE *fptr = fopen("tasks.md", "r");
 
     if (fptr == NULL) {
-        return 0;
+        return;
     }
 
     char content[1024];
-    char last_line[256];
-    int t_no = 0;
 
     while (fgets(content, sizeof(content), fptr) != NULL) {
         strcpy(last_line, content);
     }
     fclose(fptr);
+}
+
+static int get_task_number() {
+    int t_no = 0;
+    char last_line[1024];
+    get_last_line(last_line);
+
+    printf("%s\n", last_line);
     
     int index = strcspn(last_line, " ");
     char *delim = &last_line[index];
@@ -56,6 +62,18 @@ static void parse_cmd(char *cmd, const char *value) {
         printf("\n");
 
         fclose(fptr);
+    } else if (strcmp(cmd, "delete") == 0) {
+        if (strcmp(value, "") == 0) {
+            fprintf(stderr, "error: task number of task to be deleted cannot be empty.\n\n");
+            return;
+        }
+
+        if (strcmp(value, "lt") == 0) {
+            char last_line[1024];
+            get_last_line(last_line);
+        } else {
+            int task = atoi(value);
+        }
     } else {
         fprintf(stderr, "error: command '%s' not found.\n\n", cmd);
     }
