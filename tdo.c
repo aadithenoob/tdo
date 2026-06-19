@@ -4,9 +4,9 @@
 #include <ctype.h>
 
 static int get_task_number() {
-    FILE *file = fopen("tasks.md", "r");
+    FILE *fptr = fopen("tasks.md", "r");
 
-    if (file == NULL) {
+    if (fptr == NULL) {
         return 0;
     }
 
@@ -14,10 +14,10 @@ static int get_task_number() {
     char last_line[256];
     int t_no = 0;
 
-    while (fgets(content, sizeof(content), file) != NULL) {
+    while (fgets(content, sizeof(content), fptr) != NULL) {
         strcpy(last_line, content);
     }
-    fclose(file);
+    fclose(fptr);
     
     int index = strcspn(last_line, " ");
     char *delim = &last_line[index];
@@ -38,24 +38,24 @@ static void parse_cmd(char *cmd, const char *value) {
         int t_no = get_task_number();
         
         t_no++;
-        FILE *file; 
+        FILE *fptr; 
 
-        file = fopen("tasks.md", "a");
-        fprintf(file, "%d %s\n", t_no, value);
+        fptr = fopen("tasks.md", "a");
+        fprintf(fptr, "%d %s\n", t_no, value);
         printf("Task added.\n\n");
-        fclose(file);
+        fclose(fptr);
     } else if (strcmp(cmd, "view") == 0) {
-        FILE *file; 
+        FILE *fptr; 
         char content[1024];
 
-        file = fopen("tasks.md", "r");
+        fptr = fopen("tasks.md", "r");
 
-        while (fgets(content, sizeof(content), file) != NULL) {
+        while (fgets(content, sizeof(content), fptr) != NULL) {
             printf("%s", content);
         }
         printf("\n");
 
-        fclose(file);
+        fclose(fptr);
     } else {
         fprintf(stderr, "error: command '%s' not found.\n\n", cmd);
     }
