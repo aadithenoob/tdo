@@ -30,6 +30,11 @@ static int get_task_number() {
 
 static void parse_cmd(char *cmd, const char *value) {
     if (strcmp(cmd, "add") == 0) {
+        if (strcmp(value, "") == 0) {
+            fprintf(stderr, "error: task cannot be empty.\n\n");
+            return;
+        }
+
         int t_no = get_task_number();
         
         t_no++;
